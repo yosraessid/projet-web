@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { X, Plus, Trash2, UserPlus, Search } from 'lucide-react';
@@ -110,10 +111,6 @@ function ProjectDetails({ projects, onClose, onUpdate, onDelete }) {
       ...task,
       assignedTo: task.assignedTo.filter(id => id !== memberId)
     })));
-  };
-
-  const handleDeleteTask = (taskId) => {
-    setTasks(tasks.filter(task => task.id !== taskId));
   };
 
   return (
@@ -252,23 +249,15 @@ function ProjectDetails({ projects, onClose, onUpdate, onDelete }) {
                   <div key={task.id} className="task-item">
                     <div className="task-header">
                       <div className="task-title">{task.title}</div>
-                      <div className="task-actions">
-                        <select
-                          value={task.status}
-                          onChange={(e) => handleUpdateTaskStatus(task.id, e.target.value)}
-                          className={`task-status status-${task.status}`}
-                        >
-                          <option value="todo">À faire</option>
-                          <option value="in-progress">En cours</option>
-                          <option value="completed">Terminé</option>
-                        </select>
-                        <button
-                          onClick={() => handleDeleteTask(task.id)}
-                          className="delete-task-button"
-                        >
-                          <Trash2 size={20} />
-                        </button>
-                      </div>
+                      <select
+                        value={task.status}
+                        onChange={(e) => handleUpdateTaskStatus(task.id, e.target.value)}
+                        className={`task-status status-${task.status}`}
+                      >
+                        <option value="todo">À faire</option>
+                        <option value="in-progress">En cours</option>
+                        <option value="completed">Terminé</option>
+                      </select>
                     </div>
                     <div className="task-description">{task.description}</div>
                   </div>
